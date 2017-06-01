@@ -2,25 +2,254 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway:600');
 
 
+/*****************************
+** global styles
+*****************************/
+
 body {
   font-family: 'Raleway', sans-serif;
   margin: 0;
+  background: #666;
+  text-align: center;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Playfair Display', serif;
-  font-style: italic;
   font-weight: 700;
-  color: #4a6d70;
-  margin-bottom: .5em;
+  color: #9E1F14;
+  margin: .5em;
+  letter-spacing: .1rem;
 }
 
 h1 {
   font-size: 3em;
+  line-height: 100%;
+  margin: 0;
+  padding: 0;
+  font-style: italic;
+}
+
+h2 {
+  font-size: 2em;
+  padding: .5em;
+}
+
+h3 {
+  font-size: 1.5em;
+  padding: .3em;
 }
 
 button {
   text-decoration: none;
   border: none;
   outline: none;
+  text-transform: uppercase;
+  padding: .5rem;
+}
+
+input {
+  width: 50%;
+  padding: .5rem;
+  margin: .5rem auto;
+  font-size: 1.2em;
+  background: #fff;
+  font-family: 'Raleway', sans-serif;
+  text-align: center;
+  border: none;
+}
+
+input:focus {
+  border-color: #9E1F14;
+  box-shadow: 0 0 .4rem #9E1F14;
+  outline: none;
+}
+
+/*****************************
+** class styles
+*****************************/
+
+.header {
+  margin: 1em auto;
+  background: #9AC2C7;
+  padding: 1rem 0;
+  max-width: 45rem;
+  position: relative;
+}
+
+.container-create {
+  position: relative;
+  background: #D0E7ED;
+  max-width: 60rem;
+  width: 90%;
+  margin: .5rem auto;
+  height: auto;
+  box-shadow: 0 .5rem 1rem #333;
+  z-index: 10;
+  overflow: hidden;
+}
+
+.select {
+  position: relative;
+  width: 100%;
+  max-width: 50rem;
+  display: block;
+  margin: 1rem auto;
+}
+
+.select-header {
+  background: #9AC2C7;
+}
+
+.select-col {
+  display: block;
+  position: relative;
+  width: 25%;
+  float: left;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 1.2em;
+}
+
+.select-img {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+
+.select-img img {
+  display: block;
+  height: auto;
+  width: auto;
+  max-width: 100%;
+  border-radius: 100%;
+}
+
+.select-img img:hover {
+  opacity: .7;
+}
+
+.hero-vals {
+  position: relative;
+  width: 100%;
+  max-width: 50rem;
+  display: block;
+  margin: 3rem auto;
+  color: #fff;
+}
+
+.vals-col {
+  float: left;
+  width: 33.333%;
+  margin: 1rem auto;
+  padding: .5em 0;
+  text-transform: uppercase;
+}
+
+.actions button {
+  margin: 0 .5rem 1rem .5rem;
+}
+
+.container-army {
+  margin-top: -1rem;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 45rem;
+  z-index: -10;
+  background: #9AC2C7;
+}
+
+/*****************************
+** id styles
+*****************************/
+
+#btn-reset-army {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 90%;
+  font-size: .7em;
+  height: 3.2rem;
+  width: 3.2rem;
+  background: #fff;
+  color: #9E1F14;
+  border-radius: 100%;
+}
+
+#btn-reset-army:hover {
+  background: #9E1F14;
+  color: #fff;
+}
+
+#btn-reset-army:active {
+  background: #470E09;
+}
+
+#btn-add-hero {
+  position: absolute;
+  top: 7%;
+  left: 63%;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 100%;
+  background: #4E6D70;
+  color: #fff;
+  font-size: 1.5em;
+  line-height: 70%;
+  transform: translateY(-.2rem);
+}
+
+#btn-add-hero:hover {
+  background: #435E61;
+  box-shadow: 0 .1rem .4rem #333;
+}
+
+#btn-add-hero:active {
+  transform: translateY(1px);
+}
+
+[id*='select-cap-'] {
+  margin: .5em;
+}
+
+#val-element {
+  background: #8B95C7;
+}
+
+#val-weapon {
+  background: #99A5DB;
+}
+
+#val-familiar {
+  background: #7982AD;
+}
+
+#btn-reset-hero {
+  color: #4E6D70;
+}
+
+#btn-reset-hero:hover {
+  background: #9E1F14;
+  color: #fff;
+}
+
+#btn-reset-hero:active {
+  background: #470E09;
+}
+
+#btn-submit {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 100%;
+  background: #4E6D70;
+  color: #fff;
+}
+
+#btn-submit:hover {
+  background: #435E61;
+  box-shadow: 0 .1rem .4rem #333;
+}
+
+#btn-submit:active {
+  transform: translateY(1px);
 }
