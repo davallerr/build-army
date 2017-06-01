@@ -11,13 +11,6 @@ var Hero = function(name, element, weapon, familiar) {
   this.familiar = familiar;
 }
 
-// create new unique hero and push to army array
-function addHero() {
-  var newHero = new Hero(name, element, weapon, familiar);
-  army.push(newHero);
-}
-
-
 // new hero creation function
 function createHero() {
   console.log('creatHero...');
@@ -31,6 +24,17 @@ function createHero() {
   weapon = '';
   familiar = '';
 
+  document.getElementById('hero-name').value = '';
+
+  // reset vals-col content
+  document.getElementById('val-element').innerHTML = 'Element';
+  document.getElementById('val-element').style.opacity = .5;
+  document.getElementById('val-weapon').innerHTML = 'Weapon';
+  document.getElementById('val-weapon').style.opacity = .5;
+  document.getElementById('val-familiar').innerHTML = 'Familiar';
+  document.getElementById('val-familiar').style.opacity = .5;
+
+  // call first step in hero creation: selectElement
   selectElement();
 
   // choose hero element
@@ -53,24 +57,28 @@ function createHero() {
     document.getElementById('select-img-1').onclick = function() {
       element = 'fire';
       document.getElementById('val-element').innerHTML = element;
+      document.getElementById('val-element').style.opacity = 1;
       selectWeapon();
     }
     // water
     document.getElementById('select-img-2').onclick = function() {
       element = 'water';
       document.getElementById('val-element').innerHTML = element;
+      document.getElementById('val-element').style.opacity = 1;
       selectWeapon();
     }
     // earth
     document.getElementById('select-img-3').onclick = function() {
       element = 'earth';
       document.getElementById('val-element').innerHTML = element;
+      document.getElementById('val-element').style.opacity = 1;
       selectWeapon();
     }
     // air
     document.getElementById('select-img-4').onclick = function() {
       element = 'air';
       document.getElementById('val-element').innerHTML = element;
+      document.getElementById('val-element').style.opacity = 1;
       selectWeapon();
     }
   }
@@ -95,24 +103,28 @@ function createHero() {
     document.getElementById('select-img-1').onclick = function() {
       weapon = 'sword';
       document.getElementById('val-weapon').innerHTML = weapon;
+      document.getElementById('val-weapon').style.opacity = 1;
       selectFamiliar();
     }
     // axe
     document.getElementById('select-img-2').onclick = function() {
       weapon = 'axe';
       document.getElementById('val-weapon').innerHTML = weapon;
+      document.getElementById('val-weapon').style.opacity = 1;
       selectFamiliar();
     }
     // staff
     document.getElementById('select-img-3').onclick = function() {
       weapon = 'staff';
       document.getElementById('val-weapon').innerHTML = weapon;
+      document.getElementById('val-weapon').style.opacity = 1;
       selectFamiliar();
     }
     // dagger
     document.getElementById('select-img-4').onclick = function() {
       weapon = 'dagger';
       document.getElementById('val-weapon').innerHTML = weapon;
+      document.getElementById('val-weapon').style.opacity = 1;
       selectFamiliar();
     }
   }
@@ -132,60 +144,72 @@ function createHero() {
     document.getElementById('select-cap-3').innerHTML = 'bear';
     document.getElementById('select-cap-4').innerHTML = 'ghost';
 
-    // set familiar based on image clicked and send to selectWeapon
+    // set familiar based on image clicked and send to setName
     // wolf
     document.getElementById('select-img-1').onclick = function() {
       familiar = 'wolf';
       document.getElementById('val-familiar').innerHTML = familiar;
+      document.getElementById('val-familiar').style.opacity = 1;
+      setName();
     }
     // tiger
     document.getElementById('select-img-2').onclick = function() {
       familiar = 'tiger';
       document.getElementById('val-familiar').innerHTML = familiar;
+      document.getElementById('val-familiar').style.opacity = 1;
+      setName();
     }
     // bear
     document.getElementById('select-img-3').onclick = function() {
       familiar = 'bear';
       document.getElementById('val-familiar').innerHTML = familiar;
+      document.getElementById('val-familiar').style.opacity = 1;
+      setName();
     }
     // ghost
     document.getElementById('select-img-4').onclick = function() {
       familiar = 'ghost';
       document.getElementById('val-familiar').innerHTML = familiar;
+      document.getElementById('val-familiar').style.opacity = 1;
+      setName();
+    }
+  }
+
+  // set hero name
+  function setName() {
+    console.log('setName...');
+
+    // make name input focus
+    document.getElementById('hero-name').focus();
+
+    // enable submit button
+    document.getElementById('btn-submit').addEventListener('click', addHero);
+  }
+
+  // create new unique hero and push to army array
+  function addHero() {
+    console.log('addHero...');
+
+    // immediately send back to name input if no value
+    if(document.getElementById('hero-name').value === '') {
+      setName();
+    } else {
+      // if input has value, set input as name
+      name = document.getElementById('hero-name').value;
+      console.log('success! your hero: ' + name + ', ' + element + ', ' + weapon + ', ' + familiar);
+
+      // create hero object and add to army
+      var newHero = new Hero(name, element, weapon, familiar);
+      army.push(newHero);
+      console.log(army);
+
+      // disable submit button
+      document.getElementById('btn-submit').removeEventListener('click', addHero);
+
+      // hide creator and display army
+
     }
   }
 
 
 }
-
-
-
-
-/************************************************
-** GARBAGE CAN
-************************************************/
-
-/*
-// function to add checkStep to each image
-function addCheckStep() {
-  console.log('addCheckStep...');
-  document.getElementById('select-img-1').addEventListener('click', checkStep);
-  document.getElementById('select-img-2').addEventListener('click', checkStep);
-  document.getElementById('select-img-3').addEventListener('click', checkStep);
-  document.getElementById('select-img-4').addEventListener('click', checkStep);
-}
-
-// function to check step in hero creation
-function checkStep() {
-  console.log('checkStep...');
-  if(element === '') {
-    selectElement();
-  } else if(weapon === '') {
-    selectWeapon();
-  } else if(familiar === '') {
-    selectFamiliar();
-  } else {
-    addResult();
-  }
-}
-*/
