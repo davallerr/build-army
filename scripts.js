@@ -225,6 +225,9 @@ function createHero() {
       // disable submit button
       document.getElementById('btn-submit').removeEventListener('click', addHero);
 
+      // reset select header
+      document.getElementById('select-head').innerHTML = '';
+
       // disable select images and set to placeholder
       document.getElementById('select-img-1').onclick = function() {return false;}
       document.getElementById('select-img-2').onclick = function() {return false;}
@@ -234,6 +237,14 @@ function createHero() {
       document.getElementById('select-img-2').setAttribute('src', 'img/placeholder.jpg');
       document.getElementById('select-img-3').setAttribute('src', 'img/placeholder.jpg');
       document.getElementById('select-img-4').setAttribute('src', 'img/placeholder.jpg');
+      document.getElementById('select-cap-1').innerHTML = '';
+      document.getElementById('select-cap-2').innerHTML = '';
+      document.getElementById('select-cap-3').innerHTML = '';
+      document.getElementById('select-cap-4').innerHTML = '';
+      document.getElementById('val-element').innerHTML = '';
+      document.getElementById('val-weapon').innerHTML = '';
+      document.getElementById('val-familiar').innerHTML = '';
+      document.getElementById('hero-name').value = '';
 
       // add submitted hero to army display in DOM
       var armyItemHTML = '<div class=\'army-item\'><img src=\'img/results/' + element + '-' + weapon + '-' + familiar + '.jpg\'></img>';
@@ -260,5 +271,25 @@ function resetArmy() {
     weapon = '';
     familiar = '';
     document.getElementById('hero-name').value = '';
+
+    // reset select header
+    document.getElementById('select-head').innerHTML = '';
+
+    // disable select images and set to placeholder
+    document.getElementById('select-img-1').onclick = function() {return false;}
+    document.getElementById('select-img-2').onclick = function() {return false;}
+    document.getElementById('select-img-3').onclick = function() {return false;}
+    document.getElementById('select-img-4').onclick = function() {return false;}
+    document.getElementById('select-img-1').setAttribute('src', 'img/placeholder.jpg');
+    document.getElementById('select-img-2').setAttribute('src', 'img/placeholder.jpg');
+    document.getElementById('select-img-3').setAttribute('src', 'img/placeholder.jpg');
+    document.getElementById('select-img-4').setAttribute('src', 'img/placeholder.jpg');
+    document.getElementById('select-cap-1').innerHTML = '';
+    document.getElementById('select-cap-2').innerHTML = '';
+    document.getElementById('select-cap-3').innerHTML = '';
+    document.getElementById('select-cap-4').innerHTML = '';
+    document.getElementById('val-element').innerHTML = '';
+    document.getElementById('val-weapon').innerHTML = '';
+    document.getElementById('val-familiar').innerHTML = '';
   }
 }
