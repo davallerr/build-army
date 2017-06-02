@@ -48,7 +48,8 @@ button {
 }
 
 input {
-  width: 50%;
+  width: 90%;
+  max-width: 30rem;
   padding: .5rem;
   margin: .5rem auto;
   font-size: 1.2em;
@@ -64,6 +65,7 @@ input:focus {
   box-shadow: 0 0 .4rem #9E1F14;
   outline: none;
 }
+
 
 /*****************************
 ** class styles
@@ -159,6 +161,28 @@ input:focus {
   z-index: -10;
   background: #9AC2C7;
 }
+
+#army-list {
+  position: relative;
+  width: 100%;
+  display: block;
+  margin: 1rem auto;
+}
+
+.army-item {
+  float: left;
+  width: 10%;
+  margin: .5rem 0;
+}
+
+.army-item img {
+  display: block;
+  height: auto;
+  width: auto;
+  max-width: 100%;
+  border-radius: 100%;
+}
+
 
 /*****************************
 ** id styles

@@ -4,42 +4,57 @@
 var army = [];
 
 // prototype hero object
-var Hero = function(name, element, weapon, familiar) {
+var Hero = function(name, element, weapon, familiar, avatar) {
   this.name = name;
   this.element = element;
   this.weapon = weapon;
   this.familiar = familiar;
+  this.avatar = avatar;
 }
+
+// the reset is always watching
+document.getElementById('btn-reset-army').addEventListener('click', resetArmy);
 
 // new hero creation function
 function createHero() {
-  console.log('creatHero...');
+  console.log('createHero...');
 
   // variables in createHero scope
-  var name, element, weapon, familiar;
+  var name, element, weapon, familiar, avatar;
 
-  // reset options variables
-  name = '';
-  element = '';
-  weapon = '';
-  familiar = '';
+  // clear anything for reset hero or next hero
+  resetHero();
 
-  document.getElementById('hero-name').value = '';
+  // clear any existing options and send to first step: element selection
+  function resetHero() {
+    // remove event listener for reset hero button, added back in element selection
+    document.getElementById('btn-reset-hero').removeEventListener('click', resetHero);
 
-  // reset vals-col content
-  document.getElementById('val-element').innerHTML = 'Element';
-  document.getElementById('val-element').style.opacity = .5;
-  document.getElementById('val-weapon').innerHTML = 'Weapon';
-  document.getElementById('val-weapon').style.opacity = .5;
-  document.getElementById('val-familiar').innerHTML = 'Familiar';
-  document.getElementById('val-familiar').style.opacity = .5;
+    // clear current options
+    name = '';
+    element = '';
+    weapon = '';
+    familiar = '';
+    document.getElementById('hero-name').value = '';
 
-  // call first step in hero creation: selectElement
-  selectElement();
+    // reset vals-col content
+    document.getElementById('val-element').innerHTML = 'Element';
+    document.getElementById('val-element').style.opacity = .5;
+    document.getElementById('val-weapon').innerHTML = 'Weapon';
+    document.getElementById('val-weapon').style.opacity = .5;
+    document.getElementById('val-familiar').innerHTML = 'Familiar';
+    document.getElementById('val-familiar').style.opacity = .5;
+
+    // send to element selection
+    selectElement();
+  }
 
   // choose hero element
   function selectElement() {
     console.log('selectElement...');
+
+    // add event listener for reset hero button
+    document.getElementById('btn-reset-hero').addEventListener('click', resetHero);
 
     // populate element options
     document.getElementById('select-head').innerHTML = 'Select Your Element';
@@ -196,20 +211,54 @@ function createHero() {
     } else {
       // if input has value, set input as name
       name = document.getElementById('hero-name').value;
-      console.log('success! your hero: ' + name + ', ' + element + ', ' + weapon + ', ' + familiar);
 
-      // create hero object and add to army
-      var newHero = new Hero(name, element, weapon, familiar);
+      // set hero avatar as proper result image
+      avatar = 'img/results/' + element + '-' + weapon + '-' + familiar + '.jpg';
+
+      console.log('success! your hero: ' + name + ', ' + element + ', ' + weapon + ', ' + familiar + ', ' + avatar);
+
+      // create hero object and add to army array
+      var newHero = new Hero(name, element, weapon, familiar, avatar);
       army.push(newHero);
       console.log(army);
 
       // disable submit button
       document.getElementById('btn-submit').removeEventListener('click', addHero);
 
-      // hide creator and display army
+      // disable select images and set to placeholder
+      document.getElementById('select-img-1').onclick = function() {return false;}
+      document.getElementById('select-img-2').onclick = function() {return false;}
+      document.getElementById('select-img-3').onclick = function() {return false;}
+      document.getElementById('select-img-4').onclick = function() {return false;}
+      document.getElementById('select-img-1').setAttribute('src', 'img/placeholder.jpg');
+      document.getElementById('select-img-2').setAttribute('src', 'img/placeholder.jpg');
+      document.getElementById('select-img-3').setAttribute('src', 'img/placeholder.jpg');
+      document.getElementById('select-img-4').setAttribute('src', 'img/placeholder.jpg');
 
+      // add submitted hero to army display in DOM
+      var armyItemHTML = '<div class=\'army-item\'><img src=\'img/results/' + element + '-' + weapon + '-' + familiar + '.jpg\'></img>';
+
+      document.getElementById('army-list').innerHTML += armyItemHTML;
     }
   }
+}
 
+// reset entire army
+function resetArmy() {
 
+  // confirm reset
+  var confirmReset = confirm('Say shoo-shoo to your troop-troops?');
+
+  if(confirmReset) {
+    // clear army array and display
+    army = [];
+    document.getElementById('army-list').innerHTML = '';
+
+    // clear any current hero options// clear current options
+    name = '';
+    element = '';
+    weapon = '';
+    familiar = '';
+    document.getElementById('hero-name').value = '';
+  }
 }
