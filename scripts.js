@@ -15,9 +15,16 @@ var Hero = function(name, element, weapon, familiar, avatar) {
 // the reset is always watching
 document.getElementById('btn-reset-army').addEventListener('click', resetArmy);
 
+// create hero button
+document.getElementById('btn-add-hero').addEventListener('click', createHero);
+
 // new hero creation function
 function createHero() {
   console.log('createHero...');
+
+  // expand creation container
+  document.getElementById('container-create').className = 'create-collapse';
+  document.getElementById('container-create').className = 'create-expand';
 
   // variables in createHero scope
   var name, element, weapon, familiar, avatar;
@@ -194,8 +201,9 @@ function createHero() {
   function setName() {
     console.log('setName...');
 
-    // make name input focus
+    // make name input focus and set placeholder
     document.getElementById('hero-name').focus();
+    document.getElementById('hero-name').setAttribute('placeholder', 'name your hero');
 
     // enable submit button
     document.getElementById('btn-submit').addEventListener('click', addHero);
@@ -209,6 +217,10 @@ function createHero() {
     if(document.getElementById('hero-name').value === '') {
       setName();
     } else {
+      // collapse create container
+      document.getElementById('container-create').className = 'create-expand';
+      document.getElementById('container-create').className = 'create-collapse';
+
       // if input has value, set input as name
       name = document.getElementById('hero-name').value;
 
@@ -225,14 +237,17 @@ function createHero() {
       // disable submit button
       document.getElementById('btn-submit').removeEventListener('click', addHero);
 
+      /*
       // reset select header
       document.getElementById('select-head').innerHTML = '';
+      */
 
       // disable select images and set to placeholder
       document.getElementById('select-img-1').onclick = function() {return false;}
       document.getElementById('select-img-2').onclick = function() {return false;}
       document.getElementById('select-img-3').onclick = function() {return false;}
       document.getElementById('select-img-4').onclick = function() {return false;}
+      /*
       document.getElementById('select-img-1').setAttribute('src', 'img/placeholder.jpg');
       document.getElementById('select-img-2').setAttribute('src', 'img/placeholder.jpg');
       document.getElementById('select-img-3').setAttribute('src', 'img/placeholder.jpg');
@@ -245,6 +260,7 @@ function createHero() {
       document.getElementById('val-weapon').innerHTML = '';
       document.getElementById('val-familiar').innerHTML = '';
       document.getElementById('hero-name').value = '';
+      */
 
       // add submitted hero to army display in DOM
       var armyItemHTML = '<div class=\'army-item\'><img src=\'img/results/' + element + '-' + weapon + '-' + familiar + '.jpg\'></img>';
