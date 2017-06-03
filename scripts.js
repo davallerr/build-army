@@ -263,7 +263,7 @@ function createHero() {
       */
 
       // add submitted hero to army display in DOM
-      var armyItemHTML = '<div class=\'army-item\'><img src=\'img/results/' + element + '-' + weapon + '-' + familiar + '.jpg\'></img>';
+      var armyItemHTML = '<div class=\'army-item\' onmouseover=\'showCard()\' onmouseout=\'hideCard()\'><img src=\'img/results/' + element + '-' + weapon + '-' + familiar + '.jpg\'></img><div class=\'army-item-tooltip\'><h4>' + name + '</h4><ul class=\'army-item-ul\'><li>' + element + '</li><li>' + weapon + '</li><li>' + familiar + '</li></ul></div></div>';
 
       document.getElementById('army-list').innerHTML += armyItemHTML;
     }
@@ -308,4 +308,17 @@ function resetArmy() {
     document.getElementById('val-weapon').innerHTML = '';
     document.getElementById('val-familiar').innerHTML = '';
   }
+}
+
+
+// function to show info card on mouseover
+function showCard() {
+  console.log('showCard...');
+  document.querySelector('.army-item').childNodes[1].style.display = 'block';
+}
+
+// function to hide info card on mouseout
+function hideCard() {
+  console.log('hideCard...');
+  document.querySelector('.army-item').childNodes[1].style.display = 'none';
 }

@@ -72,7 +72,10 @@ input:focus {
 *****************************/
 
 .header {
-  margin: 1em auto;
+  margin-top: 1rem;
+  margin-bottom: 0;
+  margin-left: auto;
+  margin-right: auto;
   background: #9AC2C7;
   padding: 1rem 0;
   max-width: 45rem;
@@ -84,7 +87,7 @@ input:focus {
   background: #D0E7ED;
   max-width: 60rem;
   width: 90%;
-  margin: .5rem auto;
+  margin: 0 auto;
   box-shadow: 0 .5rem 1rem #333;
   z-index: 10;
   overflow: hidden;
@@ -163,9 +166,7 @@ input:focus {
 }
 
 .container-army {
-  margin-top: -1rem;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 2rem auto;
   max-width: 45rem;
   z-index: -10;
   background: #9AC2C7;
@@ -182,6 +183,7 @@ input:focus {
   float: left;
   width: 10%;
   margin: .5rem 0;
+  position: relative;
 }
 
 .army-item img {
@@ -190,6 +192,26 @@ input:focus {
   width: auto;
   max-width: 100%;
   border-radius: 100%;
+}
+
+.army-item-tooltip {
+  display: none;
+  position: absolute;
+  top: -50%;
+  left: 110%;
+  z-index: 20;
+  min-width: 8rem;
+  height: auto;
+  padding: .2rem .1rem;
+  background: #ddd;
+  opacity: .9;
+  box-shadow: 0 .2rem .5rem #333;
+}
+
+.army-item-ul {
+  list-style: none;
+  font-size: .8em;
+  padding: 0;
 }
 
 
