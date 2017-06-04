@@ -263,9 +263,24 @@ function createHero() {
       */
 
       // add submitted hero to army display in DOM
-      var armyItemHTML = '<div class=\'army-item\' onmouseover=\'showCard()\' onmouseout=\'hideCard()\'><img src=\'img/results/' + element + '-' + weapon + '-' + familiar + '.jpg\'></img><div class=\'army-item-tooltip\'><h4>' + name + '</h4><ul class=\'army-item-ul\'><li>' + element + '</li><li>' + weapon + '</li><li>' + familiar + '</li></ul></div></div>';
+      var armyItemHTML = '<div class=\'army-item\'><img src=\'img/results/' + element + '-' + weapon + '-' + familiar + '.jpg\'></img><div class=\'army-item-tooltip\'><h4>' + name + '</h4><ul class=\'army-item-ul\'><li>' + element + '</li><li>' + weapon + '</li><li>' + familiar + '</li></ul></div></div>';
 
       document.getElementById('army-list').innerHTML += armyItemHTML;
+
+      var armyItems = document.getElementById('army-list').children.length;
+      console.log('armyItems: ' + armyItems);
+
+      function addHover() {
+        for(var i=0; i<armyItems; i++) {
+          document.getElementById('army-list').childNodes[i].getElementsByTagName('div').onmouseover.style.display = 'block';
+          /*
+          document.getElementById('army-list').children[i].children[1].onmouseover.style.display = 'block';
+          document.getElementById('army-list').children[i].children[1].onmouseout.style.display = 'none';
+          */
+        }
+      }
+
+      addHover();
     }
   }
 }
@@ -309,7 +324,6 @@ function resetArmy() {
     document.getElementById('val-familiar').innerHTML = '';
   }
 }
-
 
 // function to show info card on mouseover
 function showCard() {
