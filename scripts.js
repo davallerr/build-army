@@ -267,17 +267,42 @@ function createHero() {
 
       document.getElementById('army-list').innerHTML += armyItemHTML;
 
+      // get number of army items and add tooltip on hover to each
       var armyItems = document.getElementById('army-list').children.length;
       console.log('armyItems: ' + armyItems);
 
       function addHover() {
+        console.log('addHover...');
+
         for(var i=0; i<armyItems; i++) {
-          document.getElementById('army-list').childNodes[i].getElementsByTagName('div').onmouseover.style.display = 'block';
-          /*
-          document.getElementById('army-list').children[i].children[1].onmouseover.style.display = 'block';
-          document.getElementById('army-list').children[i].children[1].onmouseout.style.display = 'none';
-          */
+          console.log('i: ' + i);
+
+          document.getElementsByClassName('army-item')[i].addEventListener('mouseover', function () {
+            document.getElementsByClassName('army-item-tooltip')[i].style.display = 'block';
+          });
+
+          document.getElementsByClassName('army-item')[i].addEventListener('mouseout', function () {
+            document.getElementsByClassName('army-item-tooltip')[i].style.display = 'none';
+          });
+
         }
+
+
+        /*
+        for(var i=0; i<armyItems.length; i++) {
+          var armyItem = document.getElementsByClassName('army-item')[i];
+          var tooltipDiv = document.getElementsByClassName('army-item-tooltip')[i];
+          console.log('tooltipDiv: ' + tooltipDiv);
+
+          armyItem.addEventListener('mouseover', function () {
+            tooltipDiv.style.display = 'block';
+          });
+
+          armyItem.addEventListener('mouseout', function () {
+            tooltipDiv.style.display = 'none';
+          });
+        }
+        */
       }
 
       addHover();
@@ -323,16 +348,4 @@ function resetArmy() {
     document.getElementById('val-weapon').innerHTML = '';
     document.getElementById('val-familiar').innerHTML = '';
   }
-}
-
-// function to show info card on mouseover
-function showCard() {
-  console.log('showCard...');
-  document.querySelector('.army-item').childNodes[1].style.display = 'block';
-}
-
-// function to hide info card on mouseout
-function hideCard() {
-  console.log('hideCard...');
-  document.querySelector('.army-item').childNodes[1].style.display = 'none';
 }
