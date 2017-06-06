@@ -14,7 +14,6 @@ var Hero = function(name, element, weapon, familiar, avatar) {
 
 // the reset is always watching
 document.getElementById('btn-reset-army').addEventListener('click', resetArmy);
-
 // create hero button
 document.getElementById('btn-add-hero').addEventListener('click', createHero);
 
@@ -226,7 +225,6 @@ function createHero() {
 
       // set hero avatar as proper result image
       avatar = 'img/results/' + element + '-' + weapon + '-' + familiar + '.jpg';
-
       console.log('success! your hero: ' + name + ', ' + element + ', ' + weapon + ', ' + familiar + ', ' + avatar);
 
       // create hero object and add to army array
@@ -237,75 +235,38 @@ function createHero() {
       // disable submit button
       document.getElementById('btn-submit').removeEventListener('click', addHero);
 
-      /*
-      // reset select header
-      document.getElementById('select-head').innerHTML = '';
-      */
-
-      // disable select images and set to placeholder
+      // disable select images
       document.getElementById('select-img-1').onclick = function() {return false;}
       document.getElementById('select-img-2').onclick = function() {return false;}
       document.getElementById('select-img-3').onclick = function() {return false;}
       document.getElementById('select-img-4').onclick = function() {return false;}
-      /*
-      document.getElementById('select-img-1').setAttribute('src', 'img/placeholder.jpg');
-      document.getElementById('select-img-2').setAttribute('src', 'img/placeholder.jpg');
-      document.getElementById('select-img-3').setAttribute('src', 'img/placeholder.jpg');
-      document.getElementById('select-img-4').setAttribute('src', 'img/placeholder.jpg');
-      document.getElementById('select-cap-1').innerHTML = '';
-      document.getElementById('select-cap-2').innerHTML = '';
-      document.getElementById('select-cap-3').innerHTML = '';
-      document.getElementById('select-cap-4').innerHTML = '';
-      document.getElementById('val-element').innerHTML = '';
-      document.getElementById('val-weapon').innerHTML = '';
-      document.getElementById('val-familiar').innerHTML = '';
-      document.getElementById('hero-name').value = '';
-      */
 
-      // add submitted hero to army display in DOM
-      var armyItemHTML = '<div class=\'army-item\'><img src=\'img/results/' + element + '-' + weapon + '-' + familiar + '.jpg\'></img><div class=\'army-item-tooltip\'><h4>' + name + '</h4><ul class=\'army-item-ul\'><li>' + element + '</li><li>' + weapon + '</li><li>' + familiar + '</li></ul></div></div>';
+      // create new hero number based on army list length
+      var armyItems = document.getElementById('army-list').children;
+      console.log('armyItems: ' + armyItems);
+
+      // create unique hero id and add to army display in DOM
+      var armyItemHTML = '<div class=\'army-item\' id=\'hero-' + (armyItems.length + 1) + '\'><img src=\'img/results/' + element + '-' + weapon + '-' + familiar + '.jpg\'></img><div class=\'army-item-tooltip\' id=\'hero-' + (armyItems.length + 1) + '-tooltip\'><h4>' + name + '</h4><ul class=\'army-item-ul\'><li>' + element + '</li><li>' + weapon + '</li><li>' + familiar + '</li></ul></div></div>';
 
       document.getElementById('army-list').innerHTML += armyItemHTML;
 
-      // get number of army items and add tooltip on hover to each
-      var armyItems = document.getElementById('army-list').children.length;
-      console.log('armyItems: ' + armyItems);
+      // add hovers to each hero item
+      for(var i=1; i<(armyItems.length + 1); i++) {
+        console.log('i: ' + i);
+        iString = i.toString();
+        var iHero = 'hero-' + iString;
+        var iTooltip = 'hero-' + iString + '-tooltip';
+        console.log('iHero: ' + iHero);
+        console.log('iTooltip: ' + iTooltip);
 
-      function addHover() {
-        console.log('addHover...');
+        document.getElementById(iHero).addEventListener('mouseover', function() {
+          document.getElementById(iTooltip).style.display = 'block';
+        });
 
-        for(var i=0; i<armyItems; i++) {
-          console.log('i: ' + i);
-
-          document.getElementsByClassName('army-item')[i].addEventListener('mouseover', function () {
-            document.getElementsByClassName('army-item-tooltip')[i].style.display = 'block';
-          });
-
-          document.getElementsByClassName('army-item')[i].addEventListener('mouseout', function () {
-            document.getElementsByClassName('army-item-tooltip')[i].style.display = 'none';
-          });
-
-        }
-
-
-        /*
-        for(var i=0; i<armyItems.length; i++) {
-          var armyItem = document.getElementsByClassName('army-item')[i];
-          var tooltipDiv = document.getElementsByClassName('army-item-tooltip')[i];
-          console.log('tooltipDiv: ' + tooltipDiv);
-
-          armyItem.addEventListener('mouseover', function () {
-            tooltipDiv.style.display = 'block';
-          });
-
-          armyItem.addEventListener('mouseout', function () {
-            tooltipDiv.style.display = 'none';
-          });
-        }
-        */
+        document.getElementById(iHero).addEventListener('mouseout', function() {
+          document.getElementById(iTooltip).style.display = 'none';
+        });
       }
-
-      addHover();
     }
   }
 }
