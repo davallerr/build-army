@@ -206,6 +206,8 @@ input:focus {
   background: #ddd;
   opacity: .9;
   box-shadow: 0 .2rem .5rem #333;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .army-item-ul {
