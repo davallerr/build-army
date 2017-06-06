@@ -245,31 +245,18 @@ function createHero() {
       var armyItems = document.getElementById('army-list').children;
       console.log('armyItems: ' + armyItems);
 
+      var heroID = 'hero-' + (armyItems.length + 1).toString();
+      var tooltipID = heroID + '-tooltip'.toString();
+      console.log('heroID: ' + heroID + ' // tooltipID: ' + tooltipID);
+
       // create unique hero id and add to army display in DOM
-      var armyItemHTML = '<div class=\'army-item\' id=\'hero-' + (armyItems.length + 1) + '\'><img src=\'img/results/' + element + '-' + weapon + '-' + familiar + '.jpg\'></img><div class=\'army-item-tooltip\' id=\'hero-' + (armyItems.length + 1) + '-tooltip\'><h4>' + name + '</h4><ul class=\'army-item-ul\'><li>' + element + '</li><li>' + weapon + '</li><li>' + familiar + '</li></ul></div></div>';
+      var armyItemHTML = '<div id=\'' + heroID + '\' class=\'army-item\' onmouseover=\'showCard(\"' + tooltipID + '\")\' onmouseout=\'hideCard(\"' + tooltipID + '\")\'><img src=\'img/results/' + element + '-' + weapon + '-' + familiar + '.jpg\'></img><div id=\'' + tooltipID + '\' class=\'army-item-tooltip\'><h4>' + name + '</h4><ul class=\'army-item-ul\'><li>' + element + '</li><li>' + weapon + '</li><li>' + familiar + '</li></ul></div></div>';
 
       document.getElementById('army-list').innerHTML += armyItemHTML;
-
-      // add hovers to each hero item
-      for(var i=1; i<(armyItems.length + 1); i++) {
-        console.log('i: ' + i);
-        iString = i.toString();
-        var iHero = 'hero-' + iString;
-        var iTooltip = 'hero-' + iString + '-tooltip';
-        console.log('iHero: ' + iHero);
-        console.log('iTooltip: ' + iTooltip);
-
-        document.getElementById(iHero).addEventListener('mouseover', function() {
-          document.getElementById(iTooltip).style.display = 'block';
-        });
-
-        document.getElementById(iHero).addEventListener('mouseout', function() {
-          document.getElementById(iTooltip).style.display = 'none';
-        });
-      }
     }
   }
 }
+
 
 // reset entire army
 function resetArmy() {
@@ -309,4 +296,14 @@ function resetArmy() {
     document.getElementById('val-weapon').innerHTML = '';
     document.getElementById('val-familiar').innerHTML = '';
   }
+}
+
+
+// functions that takes tooltip id as arg to show hover card
+function showCard(tooltip) {
+  document.getElementById(tooltip).style.display = 'block';
+}
+
+function hideCard(tooltip) {
+  document.getElementById(tooltip).style.display = 'none';
 }
