@@ -2,6 +2,23 @@
 
 // global variables
 var army = [];
+var attributes = ['fire', 'water', 'earth', 'air', 'sword', 'axe', 'staff', 'dagger', 'wolf', 'tiger', 'bear', 'ghost'];
+
+// army attribute counters object
+var armyVals = {
+  'fire': 0,
+  'water': 0,
+  'earth': 0,
+  'air': 0,
+  'sword': 0,
+  'axe': 0,
+  'staff': 0,
+  'dagger': 0,
+  'wolf': 0,
+  'tiger': 0,
+  'bear': 0,
+  'ghost': 0
+}
 
 // prototype hero object
 var Hero = function(name, element, weapon, familiar, avatar) {
@@ -12,15 +29,12 @@ var Hero = function(name, element, weapon, familiar, avatar) {
   this.avatar = avatar;
 }
 
-// the reset is always watching
+// reset and create hero button always listening
 document.getElementById('btn-reset-army').addEventListener('click', resetArmy);
-// create hero button
 document.getElementById('btn-add-hero').addEventListener('click', createHero);
 
 // new hero creation function
 function createHero() {
-  console.log('createHero...');
-
   // expand creation container
   document.getElementById('container-create').className = 'create-collapse';
   document.getElementById('container-create').className = 'create-expand';
@@ -43,7 +57,7 @@ function createHero() {
     familiar = '';
     document.getElementById('hero-name').value = '';
 
-    // reset vals-col content
+    // reset hero-vals-col content
     document.getElementById('val-element').innerHTML = 'Element';
     document.getElementById('val-element').style.opacity = .5;
     document.getElementById('val-weapon').innerHTML = 'Weapon';
@@ -57,8 +71,6 @@ function createHero() {
 
   // choose hero element
   function selectElement() {
-    console.log('selectElement...');
-
     // add event listener for reset hero button
     document.getElementById('btn-reset-hero').addEventListener('click', resetHero);
 
@@ -106,8 +118,6 @@ function createHero() {
 
   // choose hero weapon
   function selectWeapon() {
-    console.log('selectWeapon...');
-
     // populate weapon options
     document.getElementById('select-head').innerHTML = 'Select Your Weapon';
     document.getElementById('select-img-1').setAttribute('src', 'img/weapon-sword.jpg');
@@ -152,8 +162,6 @@ function createHero() {
 
   // choose hero familiar
   function selectFamiliar() {
-    console.log('selectFamiliar...');
-
     // populate familiar options
     document.getElementById('select-head').innerHTML = 'Select Your Familiar';
     document.getElementById('select-img-1').setAttribute('src', 'img/familiar-wolf.jpg');
@@ -198,8 +206,6 @@ function createHero() {
 
   // set hero name
   function setName() {
-    console.log('setName...');
-
     // make name input focus and set placeholder
     document.getElementById('hero-name').focus();
     document.getElementById('hero-name').setAttribute('placeholder', 'name your hero');
@@ -210,8 +216,6 @@ function createHero() {
 
   // create new unique hero and push to army array
   function addHero() {
-    console.log('addHero...');
-
     // immediately send back to name input if no value
     if(document.getElementById('hero-name').value === '') {
       setName();
@@ -225,12 +229,10 @@ function createHero() {
 
       // set hero avatar as proper result image
       avatar = 'img/results/' + element + '-' + weapon + '-' + familiar + '.jpg';
-      console.log('success! your hero: ' + name + ', ' + element + ', ' + weapon + ', ' + familiar + ', ' + avatar);
 
       // create hero object and add to army array
       var newHero = new Hero(name, element, weapon, familiar, avatar);
       army.push(newHero);
-      console.log(army);
 
       // disable submit button
       document.getElementById('btn-submit').removeEventListener('click', addHero);
@@ -241,13 +243,19 @@ function createHero() {
       document.getElementById('select-img-3').onclick = function() {return false;}
       document.getElementById('select-img-4').onclick = function() {return false;}
 
+      // add each selection to appropriate counter in army-vals and set display
+      armyVals[element]++;
+      armyVals[weapon]++;
+      armyVals[familiar]++;
+
+      for (var i=0; i<attributes.length; i++) {
+        document.getElementById('army-' + attributes[i]).innerHTML = armyVals[attributes[i]];
+      }
+
       // create new hero number based on army list length
       var armyItems = document.getElementById('army-list').children;
-      console.log('armyItems: ' + armyItems);
-
       var heroID = 'hero-' + (armyItems.length + 1).toString();
       var tooltipID = heroID + '-tooltip'.toString();
-      console.log('heroID: ' + heroID + ' // tooltipID: ' + tooltipID);
 
       // create unique hero id and add to army display in DOM
       var armyItemHTML = '<div id=\'' + heroID + '\' class=\'army-item\' onmouseover=\'showCard(\"' + tooltipID + '\")\' onmouseout=\'hideCard(\"' + tooltipID + '\")\'><img src=\'img/results/' + element + '-' + weapon + '-' + familiar + '.jpg\'></img><div id=\'' + tooltipID + '\' class=\'army-item-tooltip\'><h4>' + name + '</h4><ul class=\'army-item-ul\'><li>' + element + '</li><li>' + weapon + '</li><li>' + familiar + '</li></ul></div></div>';
@@ -265,9 +273,22 @@ function resetArmy() {
   var confirmReset = confirm('Say shoo-shoo to your troop-troops?');
 
   if(confirmReset) {
+    // collapse create container
+    document.getElementById('container-create').className = 'create-expand';
+    document.getElementById('container-create').className = 'create-collapse';
+
     // clear army array and display
     army = [];
     document.getElementById('army-list').innerHTML = '';
+
+    // set army-vals to 0 and set display
+    for (var i=0; i<attributes.length; i++) {
+      armyVals[attributes[i]] = 0;
+    }
+
+    for (var i=0; i<attributes.length; i++) {
+      document.getElementById('army-' + attributes[i]).innerHTML = armyVals[attributes[i]];
+    }
 
     // clear any current hero options// clear current options
     name = '';
